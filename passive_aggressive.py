@@ -3,13 +3,25 @@
 
 import numpy as np
 
-class PassiveAggressive:
-    def __init__(self, m):
-        self.t = 0
-        self.w = np.ones(m)
 
-    def update(self, y, x):
-        l = max([0, 1-y*np.dot(self.w, x)])
-        eta = l/np.dot(x, x)
-        self.w += eta*y*x
+class PassiveAggressive:
+    def __init__(self, feat_dim):
+        self.t = 0
+        self.w = np.ones(feat_dim)
+
+    def train(self, y_vec, feats_vec):
+        for i in range(len(y_vec)):
+            self.update(y_vec[i], feats_vec[i,])
+
+    def predict(self, feats):
+        return np.dot(self.w, feats)
+
+    def update(self, y, feats):
+        l = max([0, 1-y*np.dot(self.w, feats)])
+        eta = l/np.dot(feats, feats)
+        self.w += eta*y*feats
+        self.t += 1
         return 1 if l == 0 else 0
+
+
+
