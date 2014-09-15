@@ -9,6 +9,10 @@ class PassiveAggressive:
         self.t = 0
         self.w = np.ones(feat_dim)
 
+    @staticmethod
+    def _get_eta(l, feats):
+        return l/np.dot(feats, feats)
+
     def train(self, y_vec, feats_vec):
         for i in range(len(y_vec)):
             self.update(y_vec[i], feats_vec[i,])
@@ -18,7 +22,7 @@ class PassiveAggressive:
 
     def update(self, y, feats):
         l = max([0, 1-y*np.dot(self.w, feats)])
-        eta = l/np.dot(feats, feats)
+        eta = self._get_eta(l, feats)
         self.w += eta*y*feats
         self.t += 1
         return 1 if l == 0 else 0
