@@ -33,7 +33,6 @@ class Evaluator:
             fp += 1 if ret == 0 and self.y_vec[i] == -1 else 0
             fn += 1 if ret == 0 and self.y_vec[i] == 1 else 0
             tn += 1 if ret == 1 and self.y_vec[i] == -1 else 0
-            print tp, fp, fn, tn, float(tp+tn)/(tp+fp+fn+tn)
             accuracy.append(float(tp+tn)/(tp+fp+fn+tn))
             precision.append(float(tp)/(tp+fp) if tp+fp > 0 else 0.0)
             recall.append(float(tp)/(tp+fn) if tp+fn > 0 else 0.0)
