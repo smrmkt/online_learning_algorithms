@@ -9,8 +9,7 @@ class PassiveAggressive:
         self.t = 0
         self.w = np.ones(feat_dim)
 
-    @staticmethod
-    def _get_eta(l, feats):
+    def _get_eta(self, l, feats):
         return l/np.dot(feats, feats)
 
     def train(self, y_vec, feats_vec):
